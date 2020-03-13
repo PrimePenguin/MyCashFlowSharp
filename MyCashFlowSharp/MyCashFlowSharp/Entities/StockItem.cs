@@ -33,10 +33,10 @@ namespace MyCashFlowSharp.Entities
         public string BalanceLimit { get; set; }
 
         [JsonProperty("backorder_enabled")] 
-        public bool BackorderEnabled { get; set; }
+        public bool BackOrderEnabled { get; set; }
 
         [JsonProperty("backorder_estimate")]
-        public string BackorderEstimate { get; set; }
+        public string BackOrderEstimate { get; set; }
 
         [JsonProperty("balance")]
         public int Balance { get; set; }

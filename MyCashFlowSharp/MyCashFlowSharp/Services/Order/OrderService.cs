@@ -2,8 +2,6 @@
 using System.Text;
 using System.Threading.Tasks;
 using MyCashFlowSharp.Entities;
-using MyCashFlowSharp.Extensions;
-using MyCashFlowSharp.Infrastructure;
 using static System.String;
 
 namespace MyCashFlowSharp.Services.Order
@@ -82,6 +80,75 @@ namespace MyCashFlowSharp.Services.Order
         {
             var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"/orders/{orderId}/shipments/{shipmentId}/complete");
             return await ExecuteRequestAsync<ShipmentsQueryResponse>(req, HttpMethod.Post);
+        }
+
+        /// <summary>
+        /// Retrieve a specific shipment by its unique ID.
+        /// </summary>
+        /// <param name="orderId">Requested order ID</param>
+        /// <param name="shipmentId">Requested shipment ID</param>
+        /// <returns>Response contains the processed item in its new state. <see cref="ShipmentsQueryResponse"/>.</returns>
+        public virtual async Task<ShipmentsQueryResponse> GetShipmentById(string orderId, string shipmentId)
+        {
+            var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"/orders/{orderId}/shipments/{shipmentId}");
+            return await ExecuteRequestAsync<ShipmentsQueryResponse>(req, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Retrieve a list of shipments.
+        /// </summary>
+        /// <param name="orderId">Requested order ID</param>
+        /// <returns>Response contains the processed item in its new state. <see cref="ShipmentsQueryResponse"/>.</returns>
+        public virtual async Task<ShipmentsQueryResponse> GetShipments(string orderId)
+        {
+            var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"/orders/{orderId}/shipments");
+            return await ExecuteRequestAsync<ShipmentsQueryResponse>(req, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Cancel a payment.
+        /// </summary>
+        /// <param name="orderId">Requested order ID</param>
+        /// <param name="paymentId">Requested payment ID</param>
+        /// <returns>Response contains the processed item in its new state. <see cref="PaymentQueryResponse"/>.</returns>
+        public virtual async Task<PaymentQueryResponse> CancelPayment(string orderId, string paymentId)
+        {
+            var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"/orders/{orderId}/payments/{paymentId}/mark-as-cancelled");
+            return await ExecuteRequestAsync<PaymentQueryResponse>(req, HttpMethod.Post);
+        }
+
+        /// <summary>
+        /// Retrieve a specific payment by its unique ID.
+        /// </summary>
+        /// <param name="orderId">Requested order ID</param>
+        /// <param name="paymentId">Requested payment ID</param>
+        /// <returns>Response contains the processed item in its new state. <see cref="PaymentQueryResponse"/>.</returns>
+        public virtual async Task<PaymentQueryResponse> GetPaymentById(string orderId, string paymentId)
+        {
+            var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"/orders/{orderId}/payments/{paymentId}");
+            return await ExecuteRequestAsync<PaymentQueryResponse>(req, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Cancel the order.
+        /// </summary>
+        /// <param name="orderId">Requested order ID to be cancelled.</param>
+        /// <returns>Response contains the processed item in its new state. <see cref="PaymentQueryResponse"/></returns>
+        public virtual async Task<OrdersQueryResponse> CancelOrder(string orderId)
+        {
+            var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"orders/{orderId}/cancel");
+            return await ExecuteRequestAsync<OrdersQueryResponse>(req, HttpMethod.Post);
+        }
+
+        /// <summary>
+        /// Retrieve a specific payment by its unique ID.
+        /// </summary>
+        /// <param name="orderId">Requested order ID</param>
+        /// <returns>Response contains the processed item in its new state. <see cref="PaymentQueryResponse"/></returns>
+        public virtual async Task<PaymentQueryResponse> GetOrderPayments(string orderId)
+        {
+            var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"orders/{orderId}?expand=payments");
+            return await ExecuteRequestAsync<PaymentQueryResponse>(req, HttpMethod.Get);
         }
     }
 }

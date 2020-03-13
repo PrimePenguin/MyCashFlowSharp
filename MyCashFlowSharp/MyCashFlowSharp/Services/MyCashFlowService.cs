@@ -48,20 +48,11 @@ namespace MyCashFlowSharp.Services
         /// </summary>
         /// <exception cref="MyCashFlowException">Thrown if the given URL cannot be converted into a well-formed URI.</exception>
         /// <returns>The shop's API <see cref="Uri"/>.</returns>
-        public Uri BuildMyCashFlowApiUri()
-        {
-            return new Uri($"https://{_storeName}.mycashflow.fi");
-        }
+        public Uri BuildMyCashFlowApiUri() => new Uri($"https://{_storeName}.mycashflow.fi");
 
-        protected RequestUri PrepareRequest(string path)
-        {
-            return new RequestUri(new Uri($"https://{_storeName}.mycashflow.fi/api/{CashFlow.ProductEndPoints}/{path}"));
-        }
+        protected RequestUri PrepareRequest(string path) => new RequestUri(new Uri($"https://{_storeName}.mycashflow.fi/api/v1/{path}"));
 
-        protected RequestUri PrepareRequest(string apiVersion, string path)
-        {
-            return new RequestUri(new Uri($"https://{_storeName}.mycashflow.fi/api/{apiVersion}/{path}"));
-        }
+        protected RequestUri PrepareRequest(string apiVersion, string path) => new RequestUri(new Uri($"https://{_storeName}.mycashflow.fi/api/{apiVersion}/{path}"));
 
         /// <summary>
         /// Prepares a request to the path and appends the shop's access token header if applicable.
@@ -85,8 +76,11 @@ namespace MyCashFlowSharp.Services
             {
                 var policyResult = await _ExecutionPolicy.Run(baseRequestMessage, async requestMessage =>
                 {
-                    var request = _Client.SendAsync(requestMessage);
+                    // update client for basic authentication
+                    var byteArray = Encoding.ASCII.GetBytes($"{_userName}:{_apiKey}");
+                    _Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
 
+                    var request = _Client.SendAsync(requestMessage);
                     using (var response = await request)
                     {
                         var rawResult = await response.Content.ReadAsStringAsync();
@@ -152,7 +146,6 @@ namespace MyCashFlowSharp.Services
 
     public static class CashFlow
     {
-        public static string ProductEndPoints = "v1";
         public static string OrderEndPoints = "v0";
         public static string IncludeOrderParameters = "payments,products,products.return_reasons,shipments,tax_summary,comments,events";
         public static string IncludeProductParameters = "translations,image_links,visibilities,variations.stock_item,variations";

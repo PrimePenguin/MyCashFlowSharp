@@ -57,12 +57,12 @@ namespace MyCashFlowSharp.Entities
         /// Determines whether the item will be kept on sale, after its stock has run out.
         /// </summary>
         [JsonProperty("backorder_enabled")]
-        public bool BackorderEnabled { get; set; }
+        public bool BackOrderEnabled { get; set; }
 
         /// <summary>
         /// The alternative delivery time estimate, when the stock item has run out, and backorders are enabled.
         /// </summary>
         [JsonProperty("backorder_estimate")]
-        public string BackorderEstimate { get; set; }
+        public string BackOrderEstimate { get; set; }
     }
 }
