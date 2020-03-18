@@ -2,6 +2,8 @@
 using System.Text;
 using System.Threading.Tasks;
 using MyCashFlowSharp.Entities;
+using MyCashFlowSharp.Extensions;
+using MyCashFlowSharp.Infrastructure;
 using static System.String;
 
 namespace MyCashFlowSharp.Services.Order
@@ -27,6 +29,8 @@ namespace MyCashFlowSharp.Services.Order
             queryBuilder.Append(!IsNullOrEmpty(query.Expand)
                     ? $"orders?expand={query.Expand}"
                     : $"orders?expand={CashFlow.IncludeOrderParameters}");
+
+            if (query.PageSize.HasValue && query.Page.HasValue) queryBuilder.Append($"&page_size={query.PageSize}&page={query.Page}");
 
             // filter by archivedAtFrom and archivedAtTo
             if (!IsNullOrEmpty(query.ArchivedAtFrom)) queryBuilder.Append($"&archived_at-from={query.ArchivedAtFrom}");
@@ -57,7 +61,7 @@ namespace MyCashFlowSharp.Services.Order
         /// <param name="orderId">Requested order ID</param>
         /// <param name="expand">Comma-separated list of expandable sub-resources. <para></para>possible values could be: <br/>payments<br/>products<br/>products.return_reasons<br/>shipments<br/>tax_summary<br/>comments<br/>events</param>
         /// <returns>The <see cref="Order"/> request order</returns>
-        public virtual async Task<OrdersQueryResponse> GetOrderById(string orderId, string expand)
+        public virtual async Task<OrdersQueryResponse> GetOrderById(string orderId, string expand = null)
         {
             var queryBuilder = new StringBuilder();
 
@@ -149,6 +153,26 @@ namespace MyCashFlowSharp.Services.Order
         {
             var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"orders/{orderId}?expand=payments");
             return await ExecuteRequestAsync<PaymentQueryResponse>(req, HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Run the quick processing for an order. <para></para>Only orders with exactly one payment transaction can be quick processed through the API.
+        /// </summary>
+        /// <param name="orderId">Requested order ID.</param>
+        ///  /// <param name="request">Quick process request</param>
+        /// <returns>The <see cref="PaymentQueryResponse"/></returns>
+        public virtual async Task<OrdersQueryResponse> QuickProcess(string orderId, QuickProcessRequest request)
+        {
+            var req = PrepareRequest($"{CashFlow.OrderEndPoints}", $"orders/{orderId}/quick-process");
+            HttpContent content = null;
+
+            if (request != null)
+            {
+                var body = request.ToDictionary();
+                content = new JsonContent(body);
+            }
+
+            return await ExecuteRequestAsync<OrdersQueryResponse>(req, HttpMethod.Post, content);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MyCashFlowSharp.Helpers;
 using Newtonsoft.Json;
 
 namespace MyCashFlowSharp.Entities
@@ -7,13 +8,13 @@ namespace MyCashFlowSharp.Entities
     public class Product
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         [JsonProperty("updated_at")]
-        public DateTime UpdatedAt { get; set; }
+        public string UpdatedAt { get; set; }
 
         [JsonProperty("product_code")]
         public string ProductCode { get; set; }
@@ -37,19 +38,19 @@ namespace MyCashFlowSharp.Entities
         public double Price { get; set; }
 
         [JsonProperty("purchase_price")]
-        public int PurchasePrice { get; set; }
+        public string PurchasePrice { get; set; }
 
         [JsonProperty("vat_rate")]
-        public int VatRate { get; set; }
+        public string VatRate { get; set; }
 
         [JsonProperty("weight")]
-        public int Weight { get; set; }
+        public string Weight { get; set; }
 
         [JsonProperty("warranty")]
-        public int Warranty { get; set; }
+        public string Warranty { get; set; }
 
         [JsonProperty("brand_id")]
-        public int BrandId { get; set; }
+        public string BrandId { get; set; }
 
         [JsonProperty("supplier_id")]
         public int SupplierId { get; set; }
@@ -84,10 +85,47 @@ namespace MyCashFlowSharp.Entities
         [JsonProperty("barcode")]
         public string Barcode { get; set; }
 
-        [JsonProperty("stock_item")]
+        [JsonConverter(typeof(CustomAttributeArrayValueConverter))]
+        [JsonProperty("stock_item", NullValueHandling = NullValueHandling.Ignore)]
         public StockItem StockItem { get; set; }
 
         [JsonProperty("translations")]
         public List<Translation> Translations { get; set; }
+
+        [JsonProperty("variations")]
+        public List<Variation> Variations { get; set; }
+
+        [JsonProperty("image_links")]
+        public List<ImageLink> ImageLinks { get; set; }
+
+        [JsonProperty("visibilities")]
+        public List<Visibility> Visibilities { get; set; }
+    }
+
+    public class ImageLink
+    {
+        [JsonProperty("product_id")]
+        public string ProductId { get; set; }
+
+        [JsonProperty("image_id")]
+        public string ImageId { get; set; }
+
+        [JsonProperty("sort")]
+        public string Sort { get; set; }
+
+        [JsonProperty("filename")]
+        public string FileName { get; set; }
+
+        [JsonProperty("caption")]
+        public string Caption { get; set; }
+    }
+
+    public class Visibility
+    {
+        [JsonProperty("version_id")]
+        public string VersionId { get; set; }
+
+        [JsonProperty("is_visible")]
+        public bool IsVisible { get; set; }
     }
 }

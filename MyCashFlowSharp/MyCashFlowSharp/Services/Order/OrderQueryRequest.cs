@@ -51,5 +51,15 @@
         /// Retrieve orders that have been archived on or before the specified date and time.
         /// </summary>
         public string ArchivedAtTo { get; set; }
+
+        /// <summary>
+        /// Determines the number of items included on a page of the retrieved list.
+        /// </summary>
+        public int? PageSize { get; set; }
+
+        /// <summary>
+        /// Determines the page that is retrieved (used only in conjunction with page_size).
+        /// </summary>
+        public int?  Page { get; set; }
     }
 }

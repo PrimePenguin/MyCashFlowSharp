@@ -33,10 +33,10 @@ namespace MyCashFlowSharp.Services
         /// <param name="apiKey">An API access token for the shop.</param>
         protected MyCashFlowService(string storeName, string userName, string apiKey)
         {
-            _ShopUri = BuildMyCashFlowApiUri();
             _apiKey = apiKey;
             _userName = userName;
             _storeName = storeName;
+            _ShopUri = BuildMyCashFlowApiUri();
 
             // If there's a global execution policy it should be set as this instance's policy.
             // User can override it with instance-specific execution policy.
@@ -61,8 +61,6 @@ namespace MyCashFlowSharp.Services
         {
             var msg = new CloneableRequestMessage(uri.ToUri(), method, content);
             msg.Headers.Add("Accept", "application/json");
-            msg.Headers.Add("user-agent", "MyCashFlowSharp");
-
             return msg;
         }
 
@@ -86,8 +84,10 @@ namespace MyCashFlowSharp.Services
                         var rawResult = await response.Content.ReadAsStringAsync();
 
                         //Check for and throw exception when necessary.
-                        CheckResponseExceptions(response, rawResult);
-
+                        if (!string.IsNullOrEmpty(rawResult))
+                        {
+                            CheckResponseExceptions(response, rawResult);
+                        }
                         // This method may fail when the method was Delete, which is intendend.
                         // Delete methods should not be parsing the response JSON and should instead
                         // be using the non-generic ExecuteRequestAsync.
@@ -147,7 +147,8 @@ namespace MyCashFlowSharp.Services
     public static class CashFlow
     {
         public static string OrderEndPoints = "v0";
+        public static string ImageDirectory = "tuotekuvat";
         public static string IncludeOrderParameters = "payments,products,products.return_reasons,shipments,tax_summary,comments,events";
-        public static string IncludeProductParameters = "translations,image_links,visibilities,variations.stock_item,variations";
+        public static string IncludeProductParameters = "stock_item,translations,image_links,visibilities,variations.stock_item,variations";
     }
 }

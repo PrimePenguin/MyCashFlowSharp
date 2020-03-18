@@ -6,7 +6,7 @@ namespace MyCashFlowSharp.Entities
     public class Payment
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
@@ -15,10 +15,10 @@ namespace MyCashFlowSharp.Entities
         public DateTime UpdatedAt { get; set; }
 
         [JsonProperty("order_id")]
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
 
         [JsonProperty("payment_method_id")]
-        public int PaymentMethodId { get; set; }
+        public string PaymentMethodId { get; set; }
 
         [JsonProperty("reference")]
         public string Reference { get; set; }
@@ -33,7 +33,7 @@ namespace MyCashFlowSharp.Entities
         public string Currency { get; set; }
 
         [JsonProperty("exchange_rate")]
-        public int ExchangeRate { get; set; }
+        public string ExchangeRate { get; set; }
 
         [JsonProperty("is_confirmed")]
         public bool IsConfirmed { get; set; }
@@ -49,7 +49,7 @@ namespace MyCashFlowSharp.Entities
         /// CANCELLED:  Payment has been cancelled, before it was activated.
         /// </summary>
         [JsonProperty("status")]
-        public PaymentStatus Status { get; set; }
+        public string Status { get; set; }
     }
 
     public enum PaymentStatus

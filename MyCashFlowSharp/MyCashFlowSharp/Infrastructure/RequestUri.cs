@@ -26,8 +26,7 @@ namespace MyCashFlowSharp.Infrastructure
             {
                 Query = string.Join("&", query)
             };
-
-            return ub.Uri;
+            return Url;
         }
 
         public override string ToString() => ToUri().ToString();

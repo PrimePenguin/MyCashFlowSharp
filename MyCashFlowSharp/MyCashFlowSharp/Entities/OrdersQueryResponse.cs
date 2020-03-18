@@ -22,19 +22,19 @@ namespace MyCashFlowSharp.Entities
     public class Total
     {
         [JsonProperty("tax_rate")]
-        public int TaxRate { get; set; }
+        public string TaxRate { get; set; }
 
         /// <summary>
         ///  custom named property
         /// </summary>
         [JsonProperty("total")]
-        public double Whole { get; set; }
+        public double? Whole { get; set; }
 
         [JsonProperty("total_tax")]
-        public double TotalTax { get; set; }
+        public double? TotalTax { get; set; }
 
         [JsonProperty("total_without_tax")]
-        public double TotalWithoutTax { get; set; }
+        public double? TotalWithoutTax { get; set; }
     }
     public class Document
     {
@@ -48,13 +48,13 @@ namespace MyCashFlowSharp.Entities
     public class Comment
     {
         [JsonProperty("order_id")] 
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
 
         [JsonProperty("created_at")] 
         public DateTime CreatedAt { get; set; }
 
         [JsonProperty("user_id")] 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         [JsonProperty("visibility")]
         public string Visibility { get; set; }
@@ -100,10 +100,10 @@ namespace MyCashFlowSharp.Entities
         public List<Total> Total { get; set; }
     }
 
-    public class Orders
+    public class Order
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
@@ -118,7 +118,7 @@ namespace MyCashFlowSharp.Entities
         public string ExternalId { get; set; }
 
         [JsonProperty("version_id")]
-        public int VersionId { get; set; }
+        public string VersionId { get; set; }
 
         [JsonProperty("language")]
         public string Language { get; set; }
@@ -130,10 +130,10 @@ namespace MyCashFlowSharp.Entities
         public string CustomerExternalId { get; set; }
 
         [JsonProperty("shipping_method_id")]
-        public int ShippingMethodId { get; set; }
+        public string ShippingMethodId { get; set; }
 
         [JsonProperty("payment_method_id")]
-        public int PaymentMethodId { get; set; }
+        public string PaymentMethodId { get; set; }
 
         [JsonProperty("customer_information")]
         public CustomerInformation CustomerInformation { get; set; }
@@ -145,19 +145,19 @@ namespace MyCashFlowSharp.Entities
         public bool DifferentShippingAddress { get; set; }
 
         [JsonProperty("subtotal")]
-        public int SubTotal { get; set; }
+        public string SubTotal { get; set; }
 
         [JsonProperty("shipping_costs")]
-        public int ShippingCosts { get; set; }
+        public string ShippingCosts { get; set; }
 
         [JsonProperty("payment_costs")]
-        public double PaymentCosts { get; set; }
+        public double? PaymentCosts { get; set; }
 
         [JsonProperty("discount")]
         public object Discount { get; set; }
 
         [JsonProperty("total")]
-        public double Total { get; set; }
+        public double? Total { get; set; }
 
         [JsonProperty("status")]
         public string Status { get; set; }
@@ -199,7 +199,7 @@ namespace MyCashFlowSharp.Entities
     public class OrdersQueryResponse
     {
         [JsonProperty("data")]
-        public List<Orders> Orders { get; set; }
+        public List<Order> Orders { get; set; }
 
         [JsonProperty("meta")]
         public MetaData MetaData { get; set; }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace MyCashFlowSharp.Entities
@@ -7,19 +6,19 @@ namespace MyCashFlowSharp.Entities
     public class Shipment
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         [JsonProperty("updated_at")]
-        public DateTime UpdatedAt { get; set; }
+        public string UpdatedAt { get; set; }
 
         [JsonProperty("completed_at")]
-        public DateTime CompletedAt { get; set; }
+        public string CompletedAt { get; set; }
 
         [JsonProperty("order_id")]
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
 
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -28,19 +27,19 @@ namespace MyCashFlowSharp.Entities
         public string Status { get; set; }
 
         [JsonProperty("shipping_method_id")]
-        public int ShippingMethodId { get; set; }
+        public string ShippingMethodId { get; set; }
 
         [JsonProperty("weight")]
-        public int Weight { get; set; }
+        public double? Weight { get; set; }
 
         [JsonProperty("parcel_count")]
-        public int ParcelCount { get; set; }
+        public string ParcelCount { get; set; }
 
         [JsonProperty("external_id")]
         public string ExternalId { get; set; }
 
-        [JsonProperty("external_pickup_point_id")]
-        public string ExternalPickupPointId { get; set; }
+        [JsonProperty("external_pickup_postring_id")]
+        public string ExternalPickupPostringId { get; set; }
 
         [JsonProperty("tracking_code")]
         public string TrackingCode { get; set; }
@@ -50,5 +49,17 @@ namespace MyCashFlowSharp.Entities
 
         [JsonProperty("documents")]
         public List<Document> Documents { get; set; }
+    }
+
+    public class ShipmentsQueryResponse
+    {
+        [JsonProperty("data")]
+        public Shipment Shipment { get; set; }
+    }
+
+    public enum ShipmentStatus
+    {
+        OPEN,
+        COMPLETED,
     }
 }

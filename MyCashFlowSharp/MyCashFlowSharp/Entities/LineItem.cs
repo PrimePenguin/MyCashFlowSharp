@@ -7,25 +7,25 @@ namespace MyCashFlowSharp.Entities
     public class LineItem
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public string CreatedAt { get; set; }
 
         [JsonProperty("updated_at")]
-        public DateTime UpdatedAt { get; set; }
+        public string UpdatedAt { get; set; }
 
         [JsonProperty("delivered_at")]
-        public DateTime DeliveredAt { get; set; }
+        public string DeliveredAt { get; set; }
 
         [JsonProperty("order_id")]
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
 
         [JsonProperty("product_id")]
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         [JsonProperty("variation_id")]
-        public int VariationId { get; set; }
+        public string VariationId { get; set; }
 
         [JsonProperty("download_id")]
         public string DownloadId { get; set; }
@@ -43,7 +43,7 @@ namespace MyCashFlowSharp.Entities
         public string Customizations { get; set; }
 
         [JsonProperty("vat_rate")]
-        public int VatRate { get; set; }
+        public string VatRate { get; set; }
 
         [JsonProperty("bundle_id")]
         public string BundleId { get; set; }
@@ -52,10 +52,13 @@ namespace MyCashFlowSharp.Entities
         public string CampaignId { get; set; }
 
         [JsonProperty("unit_price")]
-        public double UnitPrice { get; set; }
+        public double? UnitPrice { get; set; }
+
+        [JsonProperty("purchase_price")]
+        public double? PurchasePrice { get; set; }
 
         [JsonProperty("quantity")]
-        public int Quantity { get; set; }
+        public string Quantity { get; set; }
 
         [JsonProperty("product_code")]
         public string ProductCode { get; set; }

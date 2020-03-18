@@ -29,7 +29,7 @@ namespace MyCashFlowSharp.Entities
 
     public class ProductsQueryResponse
     {
-        [JsonProperty("data ")]
+        [JsonProperty("data")]
         public List<Product> Products { get; set; }
 
         [JsonProperty("meta")]
