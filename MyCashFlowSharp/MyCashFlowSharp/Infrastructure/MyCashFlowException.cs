@@ -29,7 +29,10 @@ namespace MyCashFlowSharp.Infrastructure
 
         public MyCashFlowException() { }
 
-        public MyCashFlowException(string message) : base(message) { }
+        public MyCashFlowException(string message) : base(message)
+        {
+            Message = message;
+        }
 
         public MyCashFlowException(HttpStatusCode httpStatusCode, string message, int code, string error) : base(message)
         {

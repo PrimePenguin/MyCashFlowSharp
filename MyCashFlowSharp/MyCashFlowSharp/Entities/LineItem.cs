@@ -52,13 +52,13 @@ namespace MyCashFlowSharp.Entities
         public string CampaignId { get; set; }
 
         [JsonProperty("unit_price")]
-        public double? UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
 
         [JsonProperty("purchase_price")]
         public double? PurchasePrice { get; set; }
 
         [JsonProperty("quantity")]
-        public string Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         [JsonProperty("product_code")]
         public string ProductCode { get; set; }
@@ -76,12 +76,12 @@ namespace MyCashFlowSharp.Entities
         public string CustomData { get; set; }
 
         [JsonProperty("shipment_id")]
-        public string ShipmentId { get; set; }
+        public int? ShipmentId { get; set; }
 
         [JsonProperty("return_to_stock")] 
         public object ReturnToStock { get; set; }
 
         [JsonProperty("return_reasons")] 
-        public List<object> ReturnReasons { get; set; }
+        public List<Dictionary<string,string>> ReturnReasons { get; set; }
     }
 }

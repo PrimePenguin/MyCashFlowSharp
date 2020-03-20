@@ -67,7 +67,7 @@ namespace MyCashFlowSharp.Services.Product
         /// <param name="request">update variant stock request</param>
         public virtual async Task UpdateProductVariantStock(string productCode, UpdateVariantStockRequest request)
         {
-            var req = PrepareRequest($"/stock/{productCode}");
+            var req = PrepareRequest($"stock/{productCode}");
             HttpContent content = null;
 
             if (request != null)
@@ -85,7 +85,11 @@ namespace MyCashFlowSharp.Services.Product
         /// <param name="pageSize">Determines the number of items included on a page of the retrieved list.</param>
         public virtual async Task<SuppliersQueryResponse> GetSuppliers(int? pageSize = null, int? page = null)
         {
-            var req = PrepareRequest($"suppliers?page_size={pageSize}&page={page}");
+            var queryBuilder = new StringBuilder();
+            queryBuilder.Append("suppliers");
+            if (pageSize.HasValue && page.HasValue) queryBuilder.Append($"?page_size={pageSize}&page={page}");
+
+            var req = PrepareRequest(queryBuilder.ToString());
             return await ExecuteRequestAsync<SuppliersQueryResponse>(req, HttpMethod.Get);
         }
 

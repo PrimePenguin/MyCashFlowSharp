@@ -6,7 +6,7 @@ namespace MyCashFlowSharp.Entities
     public class Shipment
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public int? Id { get; set; }
 
         [JsonProperty("created_at")]
         public string CreatedAt { get; set; }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MyCashFlowSharp.Helpers;
 using Newtonsoft.Json;
 
@@ -35,16 +34,16 @@ namespace MyCashFlowSharp.Entities
         public string Keywords { get; set; }
 
         [JsonProperty("price")]
-        public double Price { get; set; }
+        public decimal? Price { get; set; }
 
         [JsonProperty("purchase_price")]
-        public string PurchasePrice { get; set; }
+        public decimal? PurchasePrice { get; set; }
 
         [JsonProperty("vat_rate")]
         public string VatRate { get; set; }
 
         [JsonProperty("weight")]
-        public string Weight { get; set; }
+        public decimal? Weight { get; set; }
 
         [JsonProperty("warranty")]
         public string Warranty { get; set; }
