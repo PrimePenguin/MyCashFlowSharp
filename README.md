@@ -21,10 +21,7 @@ dotnet add package MyCashFlowSharp
 
 # Using MyCashFlowSharp
 
-**Note**: All instances of `apiKey` in the examples below **do not refer to your MyCashFlow API key**.
-An access token is the token returned after authenticating and authorizing a MyCashFlow app installation with a
-real MyCashFlow store.
-
+**Note**: All instances of `user_name` and `password` in the examples below **do not refer to your MyCashFlow credentials**.
 
 ```cs
 var service = new ProductService(storName, userName, apiKey);

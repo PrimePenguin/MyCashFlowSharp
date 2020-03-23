@@ -7,7 +7,17 @@
     <Version>1.0.0</Version>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <Description>MyCashFlowSharp is a C# and .NET library that helps developers easily authenticate with and manage MyCashFlow stores.</Description>
+    <Authors>Sumit Khunger</Authors>
+    <Copyright>Prime Penguin</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/PrimePenguin/MyCashFlowSharp/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/PrimePenguin/MyCashFlowSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PrimePenguin/MyCashFlowSharp</RepositoryUrl>
+    <PackageTags>MyCashFlow,ecommerce</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://raw.githubusercontent.com/PrimePenguin/MyCashFlowSharp/master/PrimePenguin.png</PackageIconUrl>
+  </PropertyGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="Converters\" />
