@@ -33,22 +33,5 @@ namespace MyCashFlowSharp.Extensions
 
             return name.ToLower();
         }
-
-        /// <summary>
-        /// Convert list of Enums to a comma seperated string
-        /// </summary>
-        public static string EnumListToString<T>(IEnumerable<T> enumList)
-        {
-            var list = new List<string>();
-
-            if (enumList != null && enumList.Any())
-            {
-                foreach (var enumItem in enumList)
-                {
-                    list.Add((enumItem as Enum).ToSerializedString());
-                }
-            }
-            return string.Join(",", list);
-        }
     }
 }
