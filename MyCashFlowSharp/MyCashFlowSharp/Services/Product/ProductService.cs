@@ -54,7 +54,9 @@ namespace MyCashFlowSharp.Services.Product
             }
 
             queryBuilder.Append($"products?id={productIds}");
-            if (!IsNullOrEmpty(expand)) queryBuilder.Append($"&expand={expand}");
+            queryBuilder.Append(!IsNullOrEmpty(expand)
+                ? $"&expand={expand}"
+                : $"&expand={CashFlow.IncludeProductParameters}");
 
             var req = PrepareRequest(queryBuilder.ToString());
             return await ExecuteRequestAsync<ProductsQueryResponse>(req, HttpMethod.Get);

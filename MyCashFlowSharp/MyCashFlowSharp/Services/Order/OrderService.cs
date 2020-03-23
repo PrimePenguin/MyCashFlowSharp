@@ -61,7 +61,7 @@ namespace MyCashFlowSharp.Services.Order
         /// <param name="orderId">Requested order ID</param>
         /// <param name="expand">Comma-separated list of expandable sub-resources. <para></para>possible values could be: <br/>payments<br/>products<br/>products.return_reasons<br/>shipments<br/>tax_summary<br/>comments<br/>events</param>
         /// <returns>The <see cref="Order"/> request order</returns>
-        public virtual async Task<OrdersQueryResponse> GetOrderById(string orderId, string expand = null)
+        public virtual async Task<GetOrderQueryResponse> GetOrderById(string orderId, string expand = null)
         {
             var queryBuilder = new StringBuilder();
 
@@ -71,7 +71,7 @@ namespace MyCashFlowSharp.Services.Order
                 : $"?expand={CashFlow.IncludeOrderParameters}");
 
             var req = PrepareRequest($"{CashFlow.OrderEndPoints}", queryBuilder.ToString());
-            return await ExecuteRequestAsync<OrdersQueryResponse>(req, HttpMethod.Get);
+            return await ExecuteRequestAsync<GetOrderQueryResponse>(req, HttpMethod.Get);
         }
 
         /// <summary>
