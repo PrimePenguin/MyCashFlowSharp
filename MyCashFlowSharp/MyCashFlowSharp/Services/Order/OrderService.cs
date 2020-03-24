@@ -32,6 +32,11 @@ namespace MyCashFlowSharp.Services.Order
 
             if (query.PageSize.HasValue && query.Page.HasValue) queryBuilder.Append($"&page_size={query.PageSize}&page={query.Page}");
 
+            if (query.SortByAscending) queryBuilder.Append("&sort=id-asc");
+            if (query.SortByDescending) queryBuilder.Append("&sort=id-desc");
+            if (query.SortByUpdatedAtAscending) queryBuilder.Append("&sort=updated_at-asc");
+            if (query.SortByUpdatedAtDescending) queryBuilder.Append("&sort=updated_at-desc");
+
             // filter by archivedAtFrom and archivedAtTo
             if (!IsNullOrEmpty(query.ArchivedAtFrom)) queryBuilder.Append($"&archived_at-from={query.ArchivedAtFrom}");
             if (!IsNullOrEmpty(query.ArchivedAtTo)) queryBuilder.Append($"&archived_at-to={query.ArchivedAtTo}");
@@ -216,12 +221,14 @@ namespace MyCashFlowSharp.Services.Order
         /// </summary>
         /// <param name="page">Determines the page that is retrieved (used only in conjunction with page_size).</param>
         /// <param name="pageSize">Determines the number of items included on a page of the retrieved list.</param>
+        /// <param name="sortByDescending">Descending order by the ID</param>
         /// <returns>Response contains the processed item in its new state. <see cref="ShippingMethodsQueryResponse"/>.</returns>
-        public virtual async Task<ShippingMethodsQueryResponse> GetShippingMethods(int? pageSize, int? page)
+        public virtual async Task<ShippingMethodsQueryResponse> GetShippingMethods(int? pageSize, int? page, bool? sortByDescending = null)
         {
             var queryBuilder = new StringBuilder();
             queryBuilder.Append("shipping-methods");
             if (pageSize.HasValue && page.HasValue) queryBuilder.Append($"?page_size={pageSize}&page={page}");
+            if (sortByDescending.HasValue && sortByDescending == true) queryBuilder.Append("&sort=id-desc");
 
             var req = PrepareRequest(queryBuilder.ToString());
             return await ExecuteRequestAsync<ShippingMethodsQueryResponse>(req, HttpMethod.Get);
@@ -233,12 +240,14 @@ namespace MyCashFlowSharp.Services.Order
         /// </summary>
         /// <param name="page">Determines the page that is retrieved (used only in conjunction with page_size).</param>
         /// <param name="pageSize">Determines the number of items included on a page of the retrieved list.</param>
+        /// <param name="sortByDescending">Descending order by the ID</param>
         /// <returns>Response contains the processed item in its new state. <see cref="ShippingMethodsQueryResponse"/>.</returns>
-        public virtual async Task<PaymentMethodsQueryResponse> GetPaymentMethods(int? pageSize, int? page)
+        public virtual async Task<PaymentMethodsQueryResponse> GetPaymentMethods(int? pageSize, int? page, bool? sortByDescending = null)
         {
             var queryBuilder = new StringBuilder();
             queryBuilder.Append("payment-methods");
             if (pageSize.HasValue && page.HasValue) queryBuilder.Append($"?page_size={pageSize}&page={page}");
+            if (sortByDescending.HasValue && sortByDescending == true) queryBuilder.Append("&sort=id-desc");
 
             var req = PrepareRequest(queryBuilder.ToString());
             return await ExecuteRequestAsync<PaymentMethodsQueryResponse>(req, HttpMethod.Get);

@@ -61,5 +61,25 @@
         /// Determines the page that is retrieved (used only in conjunction with page_size).
         /// </summary>
         public int?  Page { get; set; }
+
+        /// <summary>
+        /// Descending order by the order ID
+        /// </summary>
+        public bool SortByDescending { get; set; }
+
+        /// <summary>
+        ///  Ascending order by the order ID
+        /// </summary>
+        public bool SortByAscending { get; set; }
+
+        /// <summary>
+        ///  Ascending order by the date of most recent update.
+        /// </summary>
+        public bool SortByUpdatedAtAscending { get; set; }
+
+        /// <summary>
+        ///  Descending order by the date of most recent update.
+        /// </summary>
+        public bool SortByUpdatedAtDescending { get; set; }
     }
 }

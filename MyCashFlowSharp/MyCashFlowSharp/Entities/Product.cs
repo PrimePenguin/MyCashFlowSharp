@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MyCashFlowSharp.Helpers;
 using Newtonsoft.Json;
 
@@ -10,10 +11,10 @@ namespace MyCashFlowSharp.Entities
         public string Id { get; set; }
 
         [JsonProperty("created_at")]
-        public string CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         [JsonProperty("updated_at")]
-        public string UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         [JsonProperty("product_code")]
         public string ProductCode { get; set; }
