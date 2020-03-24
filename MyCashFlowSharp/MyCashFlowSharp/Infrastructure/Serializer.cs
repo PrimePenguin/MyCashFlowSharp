@@ -12,13 +12,6 @@ namespace MyCashFlowSharp.Infrastructure
             NullValueHandling = NullValueHandling.Ignore
         };
 
-        public static JsonSerializer JsonSerializer { get; } = new JsonSerializer
-        {
-            DateParseHandling = DateParseHandling.DateTimeOffset
-        };
-
         public static string Serialize(object data) => JsonConvert.SerializeObject(data, Settings);
-
-        public static T Deserialize<T>(string json) => JsonConvert.DeserializeObject<T>(json, Settings);
     }
 }
