@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>PrimePenguin.MyCashFlowSharp</AssemblyName>
     <RootNamespace>PrimePenguin.MyCashFlowSharp</RootNamespace>
     <Version>1.0.1</Version>
-    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Description>MyCashFlowSharp is a C# and .NET library that helps developers easily authenticate with and manage MyCashFlow stores.</Description>
