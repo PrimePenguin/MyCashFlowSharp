@@ -26,16 +26,16 @@ namespace MyCashFlowSharp.Services.Product
         /// <param name="page">Determines the page that is retrieved (used only in conjunction with page_size).</param>
         /// <param name="expand">Comma-separated list of expandable sub-resources<para></para>possible values could be<br/>translations<br/>visibilities<br/>category_links<br/>image_links<br/>variations<br/>brand<br/>variations.stock_item</param>
         /// <param name="pageSize">Determines the number of items included on a page of the retrieved list.</param>
-        /// <param name="sortByDescending">Descending order by the ID</param>
-        public virtual async Task<ProductsQueryResponse> GetProducts(string expand = null, int? pageSize = null, 
-            int? page = null, bool? sortByDescending = null)
+        /// <param name="sort">id-asc : Ascending order by the ID <br/>id-desc : Descending order by the ID</param>
+        public virtual async Task<ProductsQueryResponse> GetProducts(string expand = null, int? pageSize = null,
+            int? page = null, string sort = null)
         {
             var queryBuilder = new StringBuilder();
             queryBuilder.Append(!IsNullOrEmpty(expand)
                 ? $"products?expand={expand}"
                 : $"products?expand={CashFlow.IncludeProductParameters}");
 
-            if (sortByDescending.HasValue && sortByDescending == true) queryBuilder.Append("&sort=id-desc");
+            if (!IsNullOrEmpty(sort)) queryBuilder.Append($"&sort={sort}");
             if (pageSize.HasValue && page.HasValue) queryBuilder.Append($"&page_size={pageSize}&page={page}");
 
             var req = PrepareRequest(queryBuilder.ToString());
@@ -47,9 +47,9 @@ namespace MyCashFlowSharp.Services.Product
         /// </summary>
         /// <param name="productIds"> Required : A comma-separated list of product ids.</param>
         /// <param name="expand">Comma-separated list of expandable sub-resources<para></para>possible values could be<br/>translations<br/>visibilities<br/>category_links<br/>image_links<br/>variations<br/>brand<br/>variations.stock_item</param>
-        /// <param name="sortByDescending">Descending order by the ID</param>
+        /// <param name="sort">id-asc : Ascending order by the ID <br/>id-desc : Descending order by the ID</param>
         /// <returns>The <see cref="ProductsQueryResponse"/>.</returns>
-        public virtual async Task<ProductsQueryResponse> GetProductsById(string productIds, string expand = null, bool? sortByDescending = null)
+        public virtual async Task<ProductsQueryResponse> GetProductsById(string productIds, string expand = null, string sort = null)
         {
             var queryBuilder = new StringBuilder();
             if (IsNullOrEmpty(productIds) && IsNullOrEmpty(expand))
@@ -58,7 +58,7 @@ namespace MyCashFlowSharp.Services.Product
             }
 
             queryBuilder.Append($"products?id={productIds}");
-            if (sortByDescending.HasValue && sortByDescending == true) queryBuilder.Append("&sort=id-desc");
+            if (!IsNullOrEmpty(sort)) queryBuilder.Append($"&sort={sort}");
             queryBuilder.Append(!IsNullOrEmpty(expand)
                 ? $"&expand={expand}"
                 : $"&expand={CashFlow.IncludeProductParameters}");
@@ -90,13 +90,13 @@ namespace MyCashFlowSharp.Services.Product
         /// </summary>
         /// <param name="page">Determines the page that is retrieved (used only in conjunction with page_size).</param>
         /// <param name="pageSize">Determines the number of items included on a page of the retrieved list.</param>
-        /// <param name="sortByDescending">Descending order by the ID</param>
-        public virtual async Task<SuppliersQueryResponse> GetSuppliers(int? pageSize = null, int? page = null, bool? sortByDescending = null)
+        /// <param name="sort">id-asc : Ascending order by the ID <br/>id-desc : Descending order by the ID</param>
+        public virtual async Task<SuppliersQueryResponse> GetSuppliers(int? pageSize = null, int? page = null, string sort = null)
         {
             var queryBuilder = new StringBuilder();
             queryBuilder.Append("suppliers");
             if (pageSize.HasValue && page.HasValue) queryBuilder.Append($"?page_size={pageSize}&page={page}");
-            if (sortByDescending.HasValue && sortByDescending == true) queryBuilder.Append("&sort=id-desc");
+            if (!IsNullOrEmpty(sort)) queryBuilder.Append($"&sort={sort}");
 
             var req = PrepareRequest(queryBuilder.ToString());
             return await ExecuteRequestAsync<SuppliersQueryResponse>(req, HttpMethod.Get);

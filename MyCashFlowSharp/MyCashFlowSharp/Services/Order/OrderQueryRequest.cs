@@ -63,23 +63,8 @@
         public int?  Page { get; set; }
 
         /// <summary>
-        /// Descending order by the order ID
+        /// id-asc : Ascending order by the order ID<br/>id-desc : Descending order by the order ID<br/>updated_at-asc : Ascending order by the date of most recent update.<br/>updated_at-desc : Descending order by the date of most recent update.<br/>
         /// </summary>
-        public bool SortByDescending { get; set; }
-
-        /// <summary>
-        ///  Ascending order by the order ID
-        /// </summary>
-        public bool SortByAscending { get; set; }
-
-        /// <summary>
-        ///  Ascending order by the date of most recent update.
-        /// </summary>
-        public bool SortByUpdatedAtAscending { get; set; }
-
-        /// <summary>
-        ///  Descending order by the date of most recent update.
-        /// </summary>
-        public bool SortByUpdatedAtDescending { get; set; }
+        public string Sort { get; set; }
     }
 }
