@@ -10,7 +10,7 @@ MyCashFlowSharp is [available on NuGet](https://www.nuget.org/packages/MyCashFlo
 console in Visual Studio to install it:
 
 ```
-Install-Package MyCashFlowSharp
+Install-Package PrimePenguin.MyCashFlowSharp
 ```
 
 If you're using .NET Core, you can use the `dotnet` command from your favorite shell:
