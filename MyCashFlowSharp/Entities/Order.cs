@@ -34,10 +34,10 @@ namespace MyCashFlowSharp.Entities
         public string CustomerExternalId { get; set; }
 
         [JsonProperty("shipping_method_id")]
-        public int ShippingMethodId { get; set; }
+        public int? ShippingMethodId { get; set; }
 
         [JsonProperty("payment_method_id")]
-        public int PaymentMethodId { get; set; }
+        public int? PaymentMethodId { get; set; }
 
         [JsonProperty("customer_information")]
         public CustomerInformation CustomerInformation { get; set; }

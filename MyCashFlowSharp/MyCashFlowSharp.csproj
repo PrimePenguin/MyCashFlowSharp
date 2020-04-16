@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>PrimePenguin.MyCashFlowSharp</AssemblyName>
     <RootNamespace>PrimePenguin.MyCashFlowSharp</RootNamespace>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
   <PropertyGroup>
     <Description>MyCashFlowSharp is a C# and .NET library that helps developers easily authenticate with and manage MyCashFlow stores.</Description>
